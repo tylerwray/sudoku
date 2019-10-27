@@ -1,0 +1,4 @@
+#!/bin/sh
+
+zip -x ".git/*" -r -X ~/Documents/School/Web\ Programming/assignment_$1.zip .
+
