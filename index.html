@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sudoku</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <h1>Sudoku</h1>
+      <hr />
+      <p>
+        Sudoku is a number placement game. It was originally called
+        <b>Number Place</b>. The objective is to fill a grid of 9x9 squares with
+        numbers so that each column, row, and each 3x3 sub-grid contain numbers
+        1-9.
+      </p>
+      <p>
+        I will provide you with a partially completed puzzle, and you’ll need to
+        fill in the digits to complete it.
+      </p>
+      <p class="flex justify-center">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/500px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png"
+          alt="sudoku"
+          title=""
+        />
+      </p>
+      <p>
+        For more information, see the
+        <a
+          href="https://en.wikipedia.org/wiki/Sudoku"
+          target="Sudoku - Wikipedia"
+          >Sudoku Wikipedia Page</a
+        >
+      </p>
+      <p>
+        Here's a fantastic example of a web based sudoku game.
+        <a href="https://sudoku.com/">Try Sudoku</a>
+      </p>
+      <hr />
+      <div class="flex justify-center">
+        <form id="login-form" class="flex flex-column max-w-sm">
+          <h2>Log in</h2>
+          <input name="userName" class="mb-3" />
+          <input type="password" name="password" class="mb-3" />
+          <div class="flex justify-center">
+            <button submit class="btn max-w-xs">Submit</button>
+          </div>
+          <div id="login-form-error" class="text-red"></div>
+        </form>
+      </div>
+      <hr />
+      <p class="flex justify-center pt-3">
+        <a class="text-lg hover-underline" href="index.html">Home</a>
+      </p>
+      <p class="flex justify-center pt-3">
+        <a class="text-lg hover-underline" href="game.html">Play Sudoku</a>
+      </p>
+      <p class="flex justify-center pt-3">
+        <a class="text-lg hover-underline" href="checkpoint.html">
+          Project Checkpoint
+        </a>
+      </p>
+    </main>
+    <script src="login.js"></script>
+  </body>
+</html>
