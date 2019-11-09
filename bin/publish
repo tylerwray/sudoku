@@ -1,4 +1,4 @@
 #!/bin/sh
 
-zip -x ".git/*" -r -X ~/Documents/School/Web\ Programming/assignment_$1.zip .
+zip -x ".git/*" -x "node_modules/*" -r -X ~/Documents/School/Web\ Programming/assignment_$1.zip .
 
