@@ -15,21 +15,7 @@ function e(name, children, { className, onClick, onChange, value } = {}) {
   }
 
   if (children) {
-    if (Array.isArray(children)) {
-      children.forEach(child => {
-        if (child) {
-          let node = child;
-          if (typeof child === "string") {
-            node = document.createTextNode(child);
-          }
-          element.appendChild(node);
-        }
-      });
-    } else if (typeof children === "string") {
-      element.appendChild(document.createTextNode(children));
-    } else {
-      element.appendChild(children);
-    }
+    addChildren(element, children);
   }
 
   if (value) {
@@ -37,6 +23,24 @@ function e(name, children, { className, onClick, onChange, value } = {}) {
   }
 
   return element;
+}
+
+function addChildren(element, children) {
+  if (Array.isArray(children)) {
+    children.forEach(child => {
+      if (child) {
+        let node = child;
+        if (typeof child === "string") {
+          node = document.createTextNode(child);
+        }
+        element.appendChild(node);
+      }
+    });
+  } else if (typeof children === "string") {
+    element.appendChild(document.createTextNode(children));
+  } else {
+    element.appendChild(children);
+  }
 }
 
 const SudokuController = {

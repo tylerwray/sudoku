@@ -77,27 +77,27 @@
     <script src="sudokuModel.js"></script>
     <script>
       (() => {
-        const root = document.getElementById("sudoku");
+        const root = document.getElementById('sudoku');
 
         SudokuController.render(root);
 
         // Animate the header emoji game icon
-        const gameIcon = document.getElementById("game-icon");
+        const gameIcon = document.getElementById('game-icon');
 
         setTimeout(() => {
-          gameIcon.style.right = "50px";
+          gameIcon.style.right = '50px';
         }, 0);
         setTimeout(() => {
-          gameIcon.style.right = "-50px";
+          gameIcon.style.right = '-50px';
         }, 1000);
         setTimeout(() => {
-          gameIcon.style.right = "100px";
+          gameIcon.style.right = '100px';
         }, 2000);
         setTimeout(() => {
-          gameIcon.style.right = "-100px";
+          gameIcon.style.right = '-100px';
         }, 3000);
         setTimeout(() => {
-          gameIcon.style.right = "0px";
+          gameIcon.style.right = '0px';
         }, 4000);
       })();
     </script>

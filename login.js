@@ -14,6 +14,7 @@ document
       localStorage.setItem("cs2550timestamp", `${userName} ${timestamp}`);
       window.location = "game.html";
     } else if (result === "invalid") {
-      document.getElementById("login-form-error").innerHTML = "Incorrect username or password"
+      document.getElementById("login-form-error").innerHTML =
+        "Incorrect username or password";
     }
   });

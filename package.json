@@ -1,0 +1,23 @@
+{
+  "name": "sudoku",
+  "version": "1.0.0",
+  "description": "A sudoku game I made for school.",
+  "main": "login.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylerwray/sudoku.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tylerwray/sudoku/issues"
+  },
+  "homepage": "https://github.com/tylerwray/sudoku#readme",
+  "dependencies": {
+    "prettier": "1.17.1"
+  }
+}

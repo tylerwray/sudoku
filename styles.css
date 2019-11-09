@@ -48,7 +48,7 @@ td {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: "Roboto", serif;
+  font-family: 'Roboto', serif;
 }
 html {
   font-size: 87.5%;
@@ -106,7 +106,7 @@ ul ul {
   margin-bottom: 0px;
 }
 code {
-  font-family: "Menlo-Regular";
+  font-family: 'Menlo-Regular';
 }
 p {
   margin-bottom: 1em;
@@ -119,7 +119,7 @@ ul li {
   text-indent: -0.35em;
 }
 ul li:before {
-  content: "•";
+  content: '•';
   color: #e06e73;
   display: inline-block;
   margin-right: 0.3em;
