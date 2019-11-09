@@ -44,6 +44,9 @@ function addChildren(element, children) {
 }
 
 const SudokuController = {
+  init() {
+    return SudokuModel.loadBoards();
+  },
   render(root) {
     // Reset Element contents
     root.innerHTML = "";
@@ -164,6 +167,12 @@ const SudokuController = {
         ],
         { className: "flex space-between pt-3" }
       );
+
+    const remoteDataEl = document.getElementById("remote-json-data");
+    remoteDataEl.innerHTML = "";
+    remoteDataEl.appendChild(
+      document.createTextNode(JSON.stringify(SudokuModel.getBoards(), null, 4))
+    );
 
     root.appendChild(
       e("div", [

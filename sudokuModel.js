@@ -18,71 +18,56 @@
  * `getValueAt` returns the value of a board cell at a
  * given index.
  */
-const EasyBoard = [
-  [1, 3, 7, 8, 2, 6, 5, 9, 4],
-  [2, null, null, null, null, 1, null, 7, null],
-  [null, 8, null, 5, null, null, null, null, 3],
-  [null, null, null, null, 1, null, null, null, null],
-  [null, null, null, null, null, null, 4, null, null],
-  [null, null, null, 7, null, null, null, null, null],
-  [null, 8, null, null, null, null, null, null, null],
-  [4, null, 1, null, null, null, 5, null, null],
-  [null, null, 9, null, null, null, null, null, null]
-];
-
-const MediumBoard = [
-  [1, 3, null, 8, null, 6, 5, 9, 4],
-  [2, null, null, null, null, 1, null, 7, null],
-  [null, 8, null, null, null, null, null, null, 3],
-  [null, null, null, null, 1, null, null, null, null],
-  [null, null, null, null, null, null, 4, null, null],
-  [null, null, null, 7, null, null, null, null, null],
-  [null, 8, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, 5, null, null],
-  [null, null, null, null, null, null, null, null, null]
-];
-
-const HardBoard = [
+const EmptyBoard = [
   [null, null, null, null, null, null, null, null, null],
-  [2, null, null, null, null, 1, null, 7, null],
-  [null, 8, null, null, null, null, null, null, 3],
-  [null, null, null, null, 1, null, null, null, null],
-  [null, null, null, null, null, null, 4, null, null],
-  [null, null, null, 7, null, null, null, null, null],
-  [null, 8, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, 5, null, null],
+  [null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null, null],
   [null, null, null, null, null, null, null, null, null]
 ];
 
 const DEFAULT_DATA = {
-  board: EasyBoard,
-  timeSpent: 82005,
-  difficulty: "easy"
+  board: EmptyBoard,
+  timeSpent: 0,
+  difficulty: "easy",
+  boards: {}
 };
 
 const SudokuModel = {
   data: { ...DEFAULT_DATA },
   reset() {
-    this.data = { ...DEFAULT_DATA };
+    this.data = {
+      ...this.data,
+      board: this.data.boards.easy,
+      timeSpent: 0,
+      difficulty: "easy"
+    };
   },
   setDifficulty(difficulty) {
     switch (difficulty) {
       case "easy":
-        this.data.board = EasyBoard;
+        this.data.board = this.data.boards.easy;
         this.data.difficulty = difficulty;
         break;
       case "medium":
-        this.data.board = MediumBoard;
+        this.data.board = this.data.boards.medium;
         this.data.difficulty = difficulty;
         break;
       case "hard":
-        this.data.board = HardBoard;
+        this.data.board = this.data.boards.hard;
         this.data.difficulty = difficulty;
         break;
     }
   },
   getDifficulty() {
     return this.data.difficulty;
+  },
+  getBoards() {
+    return this.data.boards;
   },
   getMinutesSpent() {
     return Math.floor((this.data.timeSpent / 1000 / 60) << 0);
@@ -95,5 +80,9 @@ const SudokuModel = {
   },
   getValueAt(square, spot) {
     return this.data.board[square][spot];
+  },
+  async loadBoards() {
+    this.data.boards = await fetch("boards.json").then(res => res.json());
+    this.data.board = this.data.boards.easy;
   }
 };

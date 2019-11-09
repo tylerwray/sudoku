@@ -60,6 +60,10 @@
   ],
   timeSpent: 820000
 }</code>
+
+<h2>Parse Data from boards.json</h2>
+<code id="remote-json-data" class='code-multiline'></code>
+
 </pre>
       <p class="flex justify-center pt-3">
         <a class="text-lg hover-underline" href="index.html">Home</a>
@@ -76,9 +80,10 @@
     <script src="sudokuController.js"></script>
     <script src="sudokuModel.js"></script>
     <script>
-      (() => {
+      (async () => {
         const root = document.getElementById('sudoku');
 
+        await SudokuController.init();
         SudokuController.render(root);
 
         // Animate the header emoji game icon
