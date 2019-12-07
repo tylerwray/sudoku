@@ -44,6 +44,7 @@ function addChildren(element, children) {
 }
 
 const SudokuController = {
+  initializedTimer: false,
   init() {
     return SudokuModel.loadBoards();
   },
@@ -51,9 +52,15 @@ const SudokuController = {
     // Reset Element contents
     root.innerHTML = "";
 
+    if (!this.initializedTimer) {
+      this.initializedTimer = true;
+      SudokuModel.loadTimer();
+    }
+
     setTimeout(() => {
       SudokuModel.tick();
       SudokuController.renderTimer(root);
+      SudokuModel.saveTimer();
     }, 1000);
 
     const TimeSpent = () =>

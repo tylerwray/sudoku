@@ -38,6 +38,7 @@ const DEFAULT_DATA = {
 };
 
 const SudokuModel = {
+  timerKey: "cs2250webprogramming-timer",
   data: { ...DEFAULT_DATA },
   reset() {
     this.data = {
@@ -46,6 +47,7 @@ const SudokuModel = {
       timeSpent: 0,
       difficulty: "easy"
     };
+    localStorage.removeItem(this.timerKey);
   },
   setDifficulty(difficulty) {
     switch (difficulty) {
@@ -83,6 +85,16 @@ const SudokuModel = {
   },
   tick() {
     this.data.timeSpent += 1000;
+  },
+  saveTimer() {
+    localStorage.setItem(this.timerKey, this.data.timeSpent);
+  },
+  loadTimer() {
+    const timer = localStorage.getItem(this.timerKey);
+
+    if (timer !== null) {
+      this.data.timeSpent = parseInt(timer, 10);
+    }
   },
   async loadBoards() {
     this.data.boards = await fetch("boards.json").then(res => res.json());
