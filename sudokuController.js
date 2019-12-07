@@ -89,9 +89,8 @@ const SudokuController = {
       input.focus();
 
       input.onblur = () => {
-        const value = parseInt(input.value, 10);
-        if (value > 0 && value <= 9) {
-          // event.target.innerHTML = input.value;
+        const value = parseInt(input.value, 10) || null;
+        if ((value > 0 && value <= 9) || value === null) {
           SudokuModel.setValueAt(x, y, parseInt(input.value, 10));
         }
         SudokuController.render(root);
@@ -100,8 +99,12 @@ const SudokuController = {
 
     const Cell = (square, spot) => {
       const value = SudokuModel.getValueAt(square, spot);
+      const locked = SudokuModel.isLocked(square, spot);
+      const valid = SudokuModel.isValid(square, spot, value);
+
       return e("td", value ? value.toString() : "", {
-        className: "cell",
+        className: `cell ${locked && "disabled-cell"} ${!valid &&
+          "invalid-cell"}`,
         onClick: handleCellClick(square, spot)
       });
     };

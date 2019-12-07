@@ -149,6 +149,10 @@ td {
   font-size: 32px;
 }
 
+td.invalid-cell {
+  background-color: #f09d9d;
+}
+
 /* Classes */
 .code-multiline {
   display: block;
@@ -161,6 +165,11 @@ td {
 
 .cell:hover {
   cursor: pointer;
+}
+
+.disabled-cell {
+  pointer-events: none;
+  background-color: #ADB6BE;
 }
 
 .editing-cell {
