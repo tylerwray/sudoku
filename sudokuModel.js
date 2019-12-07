@@ -42,7 +42,7 @@ const SudokuModel = {
   reset() {
     this.data = {
       ...this.data,
-      board: this.data.boards.easy,
+      board: EmptyBoard,
       timeSpent: 0,
       difficulty: "easy"
     };
@@ -80,6 +80,9 @@ const SudokuModel = {
   },
   getValueAt(square, spot) {
     return this.data.board[square][spot];
+  },
+  tick() {
+    this.data.timeSpent += 1000;
   },
   async loadBoards() {
     this.data.boards = await fetch("boards.json").then(res => res.json());

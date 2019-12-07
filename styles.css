@@ -163,29 +163,6 @@ td {
   cursor: pointer;
 }
 
-#game-icon {
-  position: relative;
-  transition: right 1000ms ease-in-out;
-  animation: bounce 1s 5;
-  animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}
-
-@keyframes bounce {
-  0% {
-    bottom: 5px;
-  }
-  25%,
-  75% {
-    bottom: 15px;
-  }
-  50% {
-    bottom: 20px;
-  }
-  100% {
-    bottom: 0;
-  }
-}
-
 .editing-cell {
   border: none;
   outline: none;
@@ -208,10 +185,6 @@ td {
 
 .btn:hover {
   background-color: #3853a3;
-}
-
-#login-form-error {
-  color: #e06e73;
 }
 
 /* Utility Classes */

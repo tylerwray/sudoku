@@ -47,29 +47,14 @@ const SudokuController = {
   init() {
     return SudokuModel.loadBoards();
   },
-  render(root) {
+  renderTimer(root) {
     // Reset Element contents
     root.innerHTML = "";
 
-    const width = Array.from(Array(3).keys());
-    const height = Array.from(Array(3).keys());
-    const user = localStorage.getItem("cs2550timestamp");
-
-    const LoggedInUser = () => e("div", user);
-
-    const handleLogOut = () => {
-      SudokuController.render(root);
-      localStorage.clear();
-    };
-
-    const LogOutButton = () => {
-      if (!user) return null;
-
-      return e("button", "Log out (clear localStorage)", {
-        onClick: handleLogOut,
-        className: "btn"
-      });
-    };
+    setTimeout(() => {
+      SudokuModel.tick();
+      SudokuController.renderTimer(root);
+    }, 1000);
 
     const TimeSpent = () =>
       e("p", [
@@ -80,10 +65,16 @@ const SudokuController = {
         )
       ]);
 
+    root.appendChild(e("div", [TimeSpent()]));
+  },
+  render(root) {
+    // Reset Element contents
+    root.innerHTML = "";
+
+    const width = Array.from(Array(3).keys());
+    const height = Array.from(Array(3).keys());
+
     const handleCellClick = (x, y) => event => {
-      document.getElementById("coordinates-clicked").innerHTML = `
-        Modified Square: ${x + 1} Cell: ${y + 1}
-      `;
       // Reset element
       event.target.innerHTML = "";
       const input = e("input", null, { className: "editing-cell" });
@@ -93,7 +84,7 @@ const SudokuController = {
       input.onblur = () => {
         const value = parseInt(input.value, 10);
         if (value > 0 && value <= 9) {
-          event.target.innerHTML = input.value;
+          // event.target.innerHTML = input.value;
           SudokuModel.setValueAt(x, y, parseInt(input.value, 10));
         }
         SudokuController.render(root);
@@ -139,8 +130,9 @@ const SudokuController = {
       SudokuController.render(root);
     };
 
-    const handleResetGame = () => {
+    const handleResetGame = async () => {
       SudokuModel.reset();
+      await SudokuModel.loadBoards();
       SudokuController.render(root);
     };
 
@@ -168,21 +160,7 @@ const SudokuController = {
         { className: "flex space-between pt-3" }
       );
 
-    const remoteDataEl = document.getElementById("remote-json-data");
-    remoteDataEl.innerHTML = "";
-    remoteDataEl.appendChild(
-      document.createTextNode(JSON.stringify(SudokuModel.getBoards(), null, 4))
-    );
-
-    root.appendChild(
-      e("div", [
-        LoggedInUser(),
-        LogOutButton(),
-        TimeSpent(),
-        Table(),
-        Controls()
-      ])
-    );
+    root.appendChild(e("div", [Table(), Controls()]));
   },
   getSpot(height, width) {
     const spots = [[0, 1, 2], [3, 4, 5], [6, 7, 8]];

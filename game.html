@@ -14,96 +14,30 @@
     <main>
       <h1>Sudoku</h1>
 
-      <div
-        id="game-icon"
-        class="flex justify-center text-2xl pb-5"
-        style="right: 0px;"
-      >
+      <div class="flex justify-center text-2xl pb-5">
         🎉
       </div>
 
+      <div id="timer" class="flex justify-center pb-3"></div>
       <div id="sudoku" class="flex justify-center pb-3"></div>
-      <div id="coordinates-clicked"></div>
 
-      <hr />
-      <h2>Sample game state</h2>
-      <ul>
-        <li>
-          <i>board</i>: The state will be a matrix of columns and rows where
-          each sub-array is a column. This way, the state can be conceptualized
-          easily by thinking of the matrix access as a standard x and y
-          coordinate pair.
-        </li>
-      </ul>
-
-      <p>Ex: (3, 4) =</p>
-
-      <ul>
-        <li>
-          <i>timeSpent</i>: The amount of time spent solving the puzzle in
-          milli-seconds.
-        </li>
-      </ul>
-
-      <pre>
-<code class='code-multiline'>const state = {
-  board: [
-    [1, 3, 7, 8, 2, 6, 5, 9, 4],
-    [2, null, null, null, null, 1, null, 7, null],
-    [null, 8, null, 5, null, null, null, null, 3],
-    [null, null, null, null, 1, null, null, null, null],
-    [null, null, null, null, null, null, 4, null, null],
-    [null, null, null, 7, null, null, null, null, null],
-    [null, 8, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, 5, null, null],
-    [null, null, null, null, null, null, null, null, null],
-  ],
-  timeSpent: 820000
-}</code>
-
-<h2>Parse Data from boards.json</h2>
-<code id="remote-json-data" class='code-multiline'></code>
-
-</pre>
       <p class="flex justify-center pt-3">
         <a class="text-lg hover-underline" href="index.html">Home</a>
       </p>
       <p class="flex justify-center pt-3">
         <a class="text-lg hover-underline" href="game.html">Play Sudoku</a>
       </p>
-      <p class="flex justify-center pt-3">
-        <a class="text-lg hover-underline" href="checkpoint.html">
-          Project Checkpoint
-        </a>
-      </p>
     </main>
     <script src="sudokuController.js"></script>
     <script src="sudokuModel.js"></script>
     <script>
       (async () => {
-        const root = document.getElementById('sudoku');
+        const root = document.getElementById("sudoku");
+        const timer = document.getElementById("timer");
 
         await SudokuController.init();
         SudokuController.render(root);
-
-        // Animate the header emoji game icon
-        const gameIcon = document.getElementById('game-icon');
-
-        setTimeout(() => {
-          gameIcon.style.right = '50px';
-        }, 0);
-        setTimeout(() => {
-          gameIcon.style.right = '-50px';
-        }, 1000);
-        setTimeout(() => {
-          gameIcon.style.right = '100px';
-        }, 2000);
-        setTimeout(() => {
-          gameIcon.style.right = '-100px';
-        }, 3000);
-        setTimeout(() => {
-          gameIcon.style.right = '0px';
-        }, 4000);
+        SudokuController.renderTimer(timer);
       })();
     </script>
   </body>
