@@ -77,9 +77,6 @@ const SudokuModel = {
     // It's okay if number is nothing
     if (value === null) return true;
 
-    // Don't err if its
-    if (this.isLocked(square, spot)) return true;
-
     // Check if 9x9 square contains the same number twice
     if (this.countItems(this.data.board[square], value) >= 2) return false;
 
@@ -89,6 +86,9 @@ const SudokuModel = {
     // Check if horizontal row is okay
     if (this.inHorizontalRow(square, spot, value)) return false;
 
+    // Don't err if its
+    if (this.isLocked(square, spot)) return true;
+
     // Prob okay if it passed these checks
     return true;
   },
@@ -96,15 +96,17 @@ const SudokuModel = {
     const offsets = [-6, -3, 0, 3, 6];
 
     for (const squareOffset of offsets) {
-      for (const spotOffset of offsets) {
-        const nineByNine = this.data.board[square + squareOffset];
-        if (
-          nineByNine &&
-          nineByNine[spot + spotOffset] === value &&
-          // Don't check the same square the value is in
-          squareOffset !== 0
-        ) {
-          return true;
+      const nineByNine = this.data.board[square + squareOffset];
+
+      if (nineByNine) {
+        for (const spotOffset of offsets) {
+          if (
+            nineByNine[spot + spotOffset] === value &&
+            // Don't check the same square the value is in
+            squareOffset !== 0
+          ) {
+            return true;
+          }
         }
       }
     }
@@ -112,18 +114,43 @@ const SudokuModel = {
     return false;
   },
   inHorizontalRow(square, spot, value) {
-    const offsets = [-2, -1, 0, 1, 2];
+    const forward = [1, 2];
+    const around = [-1, 1];
+    const behind = [-1, -1];
+    const squareOffsets = [
+      forward,
+      around,
+      behind,
+      forward,
+      around,
+      behind,
+      forward,
+      around,
+      behind
+    ];
 
-    for (const squareOffset of offsets) {
-      for (const spotOffset of offsets) {
-        const nineByNine = this.data.board[square + squareOffset];
-        if (
-          nineByNine &&
-          nineByNine[spot + spotOffset] === value &&
-          // Don't check the same square the value is in
-          squareOffset !== 0
-        ) {
-          return true;
+    const tops = [0, 1, 2];
+    const middles = [3, 4, 5];
+    const bottoms = [6, 7, 8];
+
+    const spots = [
+      tops,
+      tops,
+      tops,
+      middles,
+      middles,
+      middles,
+      bottoms,
+      bottoms,
+      bottoms
+    ];
+
+    for (const squareOffset of squareOffsets[square]) {
+      const nineByNine = this.data.board[square + squareOffset];
+
+      if (nineByNine) {
+        for (const s of spots[spot]) {
+          if (nineByNine[s] === value) return true;
         }
       }
     }

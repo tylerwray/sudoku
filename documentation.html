@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sudoku</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <h1>Documentation</h1>
+
+      <p>
+        I've loved playing Sudoku my whole life, and so it was very easy to pick
+        which game I wanted to create.
+      </p>
+      <p>
+        When thinking about how to create this game, I wanted to mimic something
+        I love dearly, <a href="https://reactjs.org/">React</a>. I designed the
+        way I wrote the UI after the React API, and tried to manage game state
+        using the same principles. Overall, I learned a lot and I'm fairly happy
+        with how the code turned out.
+      </p>
+      <p>
+        My code does in fact generate the entire board with JavaScript, and I
+        use a small CSS style sheet to style the elements. Attaching class names
+        to my elements I create with JavaScript as needed.
+      </p>
+      <p>
+        Each time the user clicks onto one of the squares, I replace it with an
+        input box, capture the value they enter, then return it to a regular
+        <code>&lt;div /&gt;</code> block element.
+      </p>
+
+      <p>
+        The game data is loaded from the boards.json file in this project. It
+        uses the fetch API, so it requires you use a web server so it can make
+        that API call. I've included one that should work on most any modern
+        laptop, you just have to run the `bin/start` script.
+      </p>
+
+      <p>
+        I'm also using localStorage to track the timer for the game as a
+        separate component. I save the time for the current game to local
+        storage every second so that when the user leaves and comes back, it
+        keeps track of the time they've spent on the puzzle.
+      </p>
+
+      <p>
+        The most difficult part of implementing this game was the validation
+        logic to see that each number is in a valid place after the user places
+        it there. I may have saved myself some time if I had thought of this up
+        front, and optimized my board data structures for validation.
+      </p>
+
+      <p class="flex justify-center pt-3">
+        <a class="text-lg hover-underline" href="index.html">Home</a>
+      </p>
+      <p class="flex justify-center pt-3">
+        <a class="text-lg hover-underline" href="game.html">Play Sudoku</a>
+      </p>
+    </main>
+  </body>
+</html>
